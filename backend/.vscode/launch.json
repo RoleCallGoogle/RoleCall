@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-RoleCallApplication<rolecall>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.google.rolecall.RoleCallApplication",
+            "projectName": "rolecall",
+            "args": ""
+        }
+    ]
+}
