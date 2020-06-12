@@ -7,14 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/")
 public class TestController {
-    
-	@RequestMapping("/")
-	public String index() {
-	  return "Welcome to spring";
-	}
   
 	@RequestMapping("/test")
-	public String sayHello(@RequestParam(value="value", required=false, defaultValue="1") String value) {
-	  return "Test " + value;
+	public String sayHello(@RequestParam(value="value", required=false, defaultValue="default") String value) {
+	  return "Hello " + value;
 	}
 }
