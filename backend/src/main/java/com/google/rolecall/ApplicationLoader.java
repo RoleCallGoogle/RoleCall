@@ -16,8 +16,8 @@ public class ApplicationLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println(environment.getProperty("java.rmi.server.hostname"));
-        System.out.println(environment.getProperty("server.port"));
-        System.out.println(InetAddress.getLocalHost().getHostAddress());
+        System.out.println("Hostname: " + environment.getProperty("java.rmi.server.hostname"));
+        System.out.println("Port: " + environment.getProperty("server.port"));
+        System.out.println("Adress: " + InetAddress.getLocalHost().getHostAddress());
     }
 }
