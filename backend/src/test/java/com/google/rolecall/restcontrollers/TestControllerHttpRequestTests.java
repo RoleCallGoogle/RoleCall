@@ -8,7 +8,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
 /**
- * Tests for the /api/test enpoint via reuests to the Spring Application server.
+ * Tests for the /api/test enpoint via http requests to the Spring Application server.
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class TestControllerHttpRequestTests {
