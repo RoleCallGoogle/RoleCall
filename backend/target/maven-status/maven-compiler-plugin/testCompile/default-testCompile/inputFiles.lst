@@ -1,1 +1,3 @@
-/usr/local/google/home/jaredhirsch/Desktop/code-space/role-call-project/RoleCall/backend/rolecall/src/test/java/com/google/rolecall/DemoApplicationTests.java
+/home/jaggerbrulato/ts-projects/RoleCall/RoleCall/backend/src/test/java/com/google/rolecall/restcontrollers/ControllerSmokeTests.java
+/home/jaggerbrulato/ts-projects/RoleCall/RoleCall/backend/src/test/java/com/google/rolecall/RoleCallApplicationTests.java
+/home/jaggerbrulato/ts-projects/RoleCall/RoleCall/backend/src/test/java/com/google/rolecall/restcontrollers/TestControllerHttpRequestTests.java

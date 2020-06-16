@@ -1,0 +1,26 @@
+steps:
+- id: configure_yamls
+  name: 'gcr.io/cloud-builders/npm'
+  args: ["run", "configureYamls", "app_frontend_test.yaml", "app_backend_test.yaml"]
+- id: build_and_deploy_backend
+  name: "gcr.io/cloud-builders/mvn"
+  args: ["-f", "backend/pom.xml", "-D", "skipTests", "clean", "package", "appengine:deploy"]
+  waitFor:
+  - configure_yamls
+- id: install_packages
+  name: 'gcr.io/cloud-builders/npm'
+  args:
+  - 'run'
+  - 'installAng'
+- id: prerender_browser_files
+  name: 'gcr.io/cloud-builders/npm'
+  args:
+  - 'run'
+  - 'buildAng'
+  waitFor:
+  - install_packages
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["app", "deploy", "app.yaml"]
+  waitFor:
+  - configure_yamls
+timeout: "1600s"
