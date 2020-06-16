@@ -1,17 +1,26 @@
 steps:
+# Move the correct yaml files for this build
+# into the correct places for deployment
 - id: configure_yamls
   name: 'gcr.io/cloud-builders/npm'
   args: ["run", "configureYamls", "app_frontend_prod.yaml", "app_backend_prod.yaml"]
+
+# Clean and build the backend, then deploy to GAE backend service
 - id: build_and_deploy_backend
   name: "gcr.io/cloud-builders/mvn"
   args: ["-f", "backend/pom.xml", "-D", "skipTests", "clean", "package", "appengine:deploy"]
   waitFor:
   - configure_yamls
+
+# Install the npm packages for angular
 - id: install_packages
   name: 'gcr.io/cloud-builders/npm'
   args:
   - 'run'
   - 'installAng'
+
+# Build the angular app for production and put the compiled
+# files in the dist/ folder
 - id: prerender_browser_files
   name: 'gcr.io/cloud-builders/npm'
   args:
@@ -19,6 +28,8 @@ steps:
   - 'buildAng'
   waitFor:
   - install_packages
+
+# Deploy the angular app under the frontend service
 - name: "gcr.io/cloud-builders/gcloud"
   args: ["app", "deploy", "app.yaml"]
   waitFor:
