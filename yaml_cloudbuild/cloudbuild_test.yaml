@@ -23,4 +23,5 @@ steps:
   args: ["app", "deploy", "app.yaml"]
   waitFor:
   - configure_yamls
+  - prerender_browser_files
 timeout: "1600s"
