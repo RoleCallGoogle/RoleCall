@@ -1,7 +1,7 @@
 steps:
 - id: configure_yamls
   name: 'gcr.io/cloud-builders/npm'
-  args: ["run", "configureYamls", "app_frontend_dev.yaml", "app_backend_dev.yaml"]
+  args: ["run", "configureYamls", "app_frontend_prod.yaml", "app_backend_prod.yaml"]
 - id: build_and_deploy_backend
   name: "gcr.io/cloud-builders/mvn"
   args: ["-f", "backend/pom.xml", "-D", "skipTests", "clean", "package", "appengine:deploy"]
