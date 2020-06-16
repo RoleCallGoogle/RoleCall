@@ -1,3 +1,4 @@
 node_modules
 backend/target/*
 backend/.vscode/*
+backend/target
