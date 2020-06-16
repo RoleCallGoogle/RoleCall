@@ -1,4 +1,9 @@
 steps:
+# Use sed to set backend port to 8080 from testing port
+- id: set_backend_port
+  name: 'gcr.io/cloud-builders/npm'
+  args: ["run", "configurePort"]
+
 # Move the correct yaml files for this build
 # into the correct places for deployment
 - id: configure_yamls
