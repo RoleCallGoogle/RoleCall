@@ -1,5 +1,8 @@
 runtime: java11
+
+# Deploy to backend service
 service: development-backend
 
+# Only use 1 instance for development
 manual_scaling:
   instances: 1
