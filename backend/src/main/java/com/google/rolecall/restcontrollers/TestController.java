@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Static mappings 
+ * Static mappings enpoint
  */
 @RestController
 @RequestMapping("/api/")
