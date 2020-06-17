@@ -1,7 +1,7 @@
 runtime: java11
 
 # Deploy to backend service
-service: testing-backend
+service: backend-testing
 
 # Only use 1 instance for development
 manual_scaling:

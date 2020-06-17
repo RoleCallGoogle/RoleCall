@@ -1,7 +1,7 @@
 runtime: python37
 
 # Deploy to frontend service
-service: production-frontend
+service: frontend
 
 # Only use 1 instance for development
 manual_scaling:
