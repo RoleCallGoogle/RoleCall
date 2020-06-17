@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Static mappings enpoint
+ * Initial REST Controller for the RoleCall Proof of Concept (POC)
  */
 @RestController
 @RequestMapping("/api/")
