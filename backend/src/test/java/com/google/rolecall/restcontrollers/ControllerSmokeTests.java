@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-/** Smoke Tests for all REST controller objects for existence */
+/** Smoke Tests for all REST controller objects for existence. */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class ControllerSmokeTests {
