@@ -12,5 +12,9 @@ class RoleCallApplicationTests {
 
   @Test
   void contextLoads_success() {
+    RoleCallApplication.main(new String[]{
+      "--spring.main.web-environment=false"
+      // TODO: Implement spring.autoconfigure.exclude to exclude the database from this test in the future
+    });
   }
 }

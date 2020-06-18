@@ -16,17 +16,19 @@ public class TestControllerHttpRequestTests {
 
   @Autowired
   private TestRestTemplate restTemplate;
+
+  private String requestForm = "http://localhost:%d/api/test%s";
     
   @Test
   public void defaultValueReturn_success() throws Exception {
-    assert(this.restTemplate.getForObject("http://localhost:" + port + "/api/test",
-      String.class)).equals("Hello default");
+    assert(this.restTemplate.getForObject(String.format(requestForm,port,""),
+        String.class)).equals("Hello default");
   }
 
   @Test
   public void paramValueReturn_success() throws Exception {
     String value = "val";
-    String request = "http://localhost:" + port + "/api/test?value=" + value;
-    assert(this.restTemplate.getForObject(request, String.class)).equals("Hello " + value);
+    assert(this.restTemplate.getForObject(String.format(requestForm,port,"?value="+value),
+        String.class)).equals("Hello " + value);
   }
 }
