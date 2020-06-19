@@ -21,14 +21,18 @@ public class TestControllerHttpRequestTests {
     
   @Test
   public void defaultValueReturn_success() throws Exception {
-    assert(this.restTemplate.getForObject(String.format(requestForm,port,""),
+    assert(this.restTemplate.getForObject(String.format(requestForm, port, ""),
         String.class)).equals("Hello default");
   }
 
   @Test
   public void paramValueReturn_success() throws Exception {
+    // Setup request
     String value = "val";
-    assert(this.restTemplate.getForObject(String.format(requestForm,port,"?value="+value),
-        String.class)).equals("Hello " + value);
+    String param = String.format("?value=%s", value);
+    String expect = String.format("Hello %s", value);
+    //
+    assert(this.restTemplate.getForObject(String.format(requestForm,port,param),
+        String.class)).equals(expect);
   }
 }
