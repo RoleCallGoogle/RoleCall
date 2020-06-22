@@ -32,7 +32,8 @@ public class TestControllerHttpRequestTests {
     String value = "val";
     String param = String.format("?value=%s", value);
     String expect = String.format("Hello %s", value);
-    //
+    
+    // Assert
     assert(this.restTemplate.getForObject(String.format(requestForm,port,param),
         String.class)).equals(expect);
   }
