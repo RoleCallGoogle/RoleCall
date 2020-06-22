@@ -27,7 +27,8 @@ public class TestControllerHttpRequestTests {
 
   @Test
   public void paramValueReturn_success() throws Exception {
-    // Setup request
+
+    // Setup
     String value = "val";
     String param = String.format("?value=%s", value);
     String expect = String.format("Hello %s", value);
