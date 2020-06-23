@@ -15,11 +15,13 @@ public class AsyncConfig implements AsyncConfigurer {
 
   @Override
   public Executor getAsyncExecutor() {
-      return new ThreadPoolTaskExecutor();
+    // TODO: Make customized thread executor  
+    return new ThreadPoolTaskExecutor();
   }
 
   @Override
   public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+    // TODO: Make comprehensive expetion handler
     return new SimpleAsyncUncaughtExceptionHandler();
   }
 }
