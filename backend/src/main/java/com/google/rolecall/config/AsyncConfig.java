@@ -16,8 +16,10 @@ public class AsyncConfig implements AsyncConfigurer {
 
   @Override
   public Executor getAsyncExecutor() {
-    // TODO: Make customized thread executor 
     ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+    executor.setQueueCapacity(20);
+    executor.setMaxPoolSize(10);
+    executor.setAllowCoreThreadTimeOut(true);
     executor.setWaitForTasksToCompleteOnShutdown(true);
     executor.setAwaitTerminationSeconds(60);
     executor.setThreadNamePrefix("default_executor_thread");
