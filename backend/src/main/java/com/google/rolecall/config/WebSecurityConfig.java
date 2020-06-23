@@ -1,4 +1,4 @@
-package com.google.rolecall;
+package com.google.rolecall.config;
 
 import java.util.concurrent.Executor;
 
