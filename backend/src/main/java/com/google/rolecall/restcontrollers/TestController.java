@@ -18,7 +18,7 @@ public class TestController extends AsyncRestEndpoint {
   }
   
   @AsyncPostEndpoint
-	public CompletableFuture<String> throwException() {
-	  return CompletableFuture.failedFuture(new Exception("Purposeful exception"));
+	public CompletableFuture<String> throwException() throws Exception {
+	  throw new Exception("Purposeful exception");
 	}
 }
