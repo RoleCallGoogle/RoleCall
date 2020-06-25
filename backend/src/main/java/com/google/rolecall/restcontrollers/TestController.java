@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Endpoint("/api/test")
 public class TestController extends AsyncRestEndpoint {
   
-	@AsyncGetEndpoint
-	public CompletableFuture<String> sayHello(@RequestParam(value="value", required=false, defaultValue="default") String value) {
-	  return CompletableFuture.completedFuture("Hello " + value);
+  @AsyncGetEndpoint
+  public CompletableFuture<String> sayHello(@RequestParam(value="value", required=false, defaultValue="default") String value) {
+    return CompletableFuture.completedFuture("Hello " + value);
   }
-  
+
   @AsyncPostEndpoint
-	public CompletableFuture<String> throwException() throws Exception {
-	  throw new Exception("Purposeful exception");
-	}
+  public CompletableFuture<String> throwException() throws Exception {
+    throw new Exception("Purposeful exception");
+  }
 }
