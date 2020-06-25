@@ -2,9 +2,9 @@ package com.google.rolecall.restcontrollers;
 
 import java.util.concurrent.CompletableFuture;
 
-import com.google.rolecall.restcontrollers.endpointannotations.AsyncGetEndpoint;
-import com.google.rolecall.restcontrollers.endpointannotations.AsyncPostEndpoint;
-import com.google.rolecall.restcontrollers.endpointannotations.Endpoint;
+import com.google.rolecall.restcontrollers.endpointannotations.Annotations.AsyncGetEndpoint;
+import com.google.rolecall.restcontrollers.endpointannotations.Annotations.AsyncPostEndpoint;
+import com.google.rolecall.restcontrollers.endpointannotations.Annotations.Endpoint;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
