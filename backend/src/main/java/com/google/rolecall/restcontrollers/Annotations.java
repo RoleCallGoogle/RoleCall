@@ -1,4 +1,4 @@
-package com.google.rolecall.restcontrollers.endpointannotations;
+package com.google.rolecall.restcontrollers;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -18,21 +18,21 @@ public final class Annotations {
   @Retention(RetentionPolicy.RUNTIME)
   @Async
   @RequestMapping(method = RequestMethod.GET)
-  public @interface AsyncGetEndpoint {}
+  @interface AsyncGetEndpoint {}
 
   /** POST request methods of an @Endpoint class. */
   @Target(ElementType.METHOD)
   @Retention(RetentionPolicy.RUNTIME)
   @Async
   @RequestMapping(method = RequestMethod.POST)
-  public @interface AsyncPostEndpoint {}
+  @interface AsyncPostEndpoint {}
 
   /** Describes a generic REST enpoint class for mapping to any request types. */
   @Target(ElementType.TYPE)
   @Retention(RetentionPolicy.RUNTIME)
   @RestController
   @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public @interface Endpoint {
+  @interface Endpoint {
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String value();
   }
