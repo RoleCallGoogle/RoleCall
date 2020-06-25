@@ -63,5 +63,6 @@ public class TestControllerHttpRequestTests {
 
     // Assert
     assert(response.getStatusCode().isError());
+    assert(response.getBody().contains("Internal Server Error")); // Current Default Error message
   }
 }
