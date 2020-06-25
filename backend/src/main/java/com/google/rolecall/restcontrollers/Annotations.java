@@ -18,14 +18,14 @@ public final class Annotations {
   @Retention(RetentionPolicy.RUNTIME)
   @Async
   @RequestMapping(method = RequestMethod.GET)
-  @interface AsyncGetEndpoint {}
+  @interface Get {}
 
   /** POST request methods of an @Endpoint class. */
   @Target(ElementType.METHOD)
   @Retention(RetentionPolicy.RUNTIME)
   @Async
   @RequestMapping(method = RequestMethod.POST)
-  @interface AsyncPostEndpoint {}
+  @interface Post {}
 
   /** Describes a generic REST enpoint class for mapping to any request types. */
   @Target(ElementType.TYPE)
@@ -33,6 +33,7 @@ public final class Annotations {
   @RestController
   @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @interface Endpoint {
+    
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String value();
   }
