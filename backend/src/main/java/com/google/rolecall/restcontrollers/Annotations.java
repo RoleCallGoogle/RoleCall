@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** General annotations for REST Controllers and asyncronous API endpoint calls. */
 final class Annotations {
+
   /** GET request methods of an @Endpoint class. */
   @Target(ElementType.METHOD)
   @Retention(RetentionPolicy.RUNTIME)
