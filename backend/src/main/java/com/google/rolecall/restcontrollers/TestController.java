@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class TestController extends AsyncRestEndpoint {
   
   @Get
-  public CompletableFuture<String> sayHello(@RequestParam(value="value", required=false, defaultValue="default") String value) {
+  public CompletableFuture<String> sayHello(@RequestParam(value="value", 
+                                                          required=false, 
+                                                          defaultValue="default") String value) {
     return CompletableFuture.completedFuture(String.format("Hello %s", value));
   }
 
