@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-public final class Annotations {
+/** General annotations for REST Controllers and asyncronous api endpoint calls. */
+final class Annotations {
   /** GET request methods of an @Endpoint class. */
   @Target(ElementType.METHOD)
   @Retention(RetentionPolicy.RUNTIME)
@@ -33,7 +34,7 @@ public final class Annotations {
   @RestController
   @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @interface Endpoint {
-    
+
     @AliasFor(annotation = RequestMapping.class, attribute = "path")
     String value();
   }
