@@ -1,15 +1,15 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { SettingsBase } from './settings_base.component';
+import { CommonModule } from '@angular/common';
+import { SettingsBaseComponent } from './settings-base/settings-base.component'
 
 
 @NgModule({
-  declarations: [SettingsBase],
+  declarations: [SettingsBaseComponent],
   imports: [
     CommonModule
   ],
   exports: [
-    SettingsBase
+    SettingsBaseComponent
   ]
 })
 export class SettingsModule { }
