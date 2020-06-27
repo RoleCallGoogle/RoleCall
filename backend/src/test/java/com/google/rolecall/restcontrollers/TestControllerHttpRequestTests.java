@@ -59,9 +59,11 @@ public class TestControllerHttpRequestTests {
     HttpEntity<Object> entity = new HttpEntity<Object>(headers);
 
     // Execute
-    ResponseEntity<String> response = this.restTemplate.exchange(String.format(requestForm,""), HttpMethod.POST, entity, String.class);
+    ResponseEntity<String> response = this.restTemplate.exchange(String.format(requestForm,""),
+        HttpMethod.POST, entity, String.class);
 
     // Assert
     assert(response.getStatusCode().isError());
+    assert(response.getBody().contains("Internal Server Error")); // Current Default Error message
   }
 }
