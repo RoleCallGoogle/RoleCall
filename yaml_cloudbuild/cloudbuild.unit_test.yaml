@@ -1,7 +1,6 @@
 steps:
 
 # Trigger backend unit tests
-- name: backend-unit-test
-  entrypoint: mvn
+- name: 'gcr.io/cloud-builders/mvn'
   args: ['test']
   dir: "backend"
