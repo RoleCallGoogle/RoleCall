@@ -1,5 +1,3 @@
-server.port=9091
-
 # Multi-Threading Configuration
 thread.pool.size=20
 max.queue.capacity=20
@@ -10,6 +8,6 @@ thread.name.prefix=default_executor_thread
 
 #local mysql instance Configuration
 spring.jpa.hibernate.ddl-auto=update
-spring.datasource.url=jdbc:mysql://localhost:3306/rolecall_db
+spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/db_example
 spring.datasource.username=rolecall
-spring.datasource.password=1234
+spring.datasource.password=ThePassword
