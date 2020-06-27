@@ -1,0 +1,7 @@
+steps:
+
+# Trigger backend unit tests
+- name: backend-unit-test
+  entrypoint: mvn
+  args: ['test']
+  dir: "backend"
