@@ -16,8 +16,16 @@ public class ControllerSmokeTests {
   @Autowired
   private TestController testController;
 
+  @Autowired
+  private IncrementUserLogin incrementUserController;
+
   @Test
   public void testControllerLoad_success() throws Exception {
     assertNotNull(testController);
+  }
+
+  @Test
+  public void incrementUserControllerLoad_success() throws Exception {
+    assertNotNull(incrementUserController);
   }
 }
