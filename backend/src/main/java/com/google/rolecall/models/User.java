@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/** Basic user information and  */
+/** Basic user information. */
 @Entity
 @Table
 public class User {
