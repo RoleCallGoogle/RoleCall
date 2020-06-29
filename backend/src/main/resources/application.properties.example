@@ -6,7 +6,14 @@ wait.for.task.completion.on.shutdown=true
 await.termination=60
 thread.name.prefix=default_executor_thread
 
-#local mysql instance Configuration
+#GCP Cloud Sql MySql Instance Configuration
+spring.cloud.gcp.projectId=${PROJECT}
+spring.cloud.gcp.sql.instanceName=rolecall-cloudsql
+spring.cloud.gcp.sql.databaseName=rolecall_db
+spring.cloud.gcp.sql.userName=rolecall
+spring.cloud.gcp.sql.password=ThePassword
+
+#Local MySql Instance Configuration
 spring.jpa.hibernate.ddl-auto=update
 spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/db_example
 spring.datasource.username=rolecall
