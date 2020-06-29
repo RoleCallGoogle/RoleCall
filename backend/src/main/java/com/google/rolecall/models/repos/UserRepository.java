@@ -1,4 +1,4 @@
-package com.google.rolecall.repos;
+package com.google.rolecall.models.repos;
 
 import com.google.rolecall.models.User;
 

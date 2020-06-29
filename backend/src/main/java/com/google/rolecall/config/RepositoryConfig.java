@@ -4,31 +4,28 @@ package com.google.rolecall.config;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/** Initializes the entity manager factory for all transactions. Does not initialize the datasoource which is setup via configurations.  */
 @Configuration
 @EnableJpaRepositories
 @EnableTransactionManagement
 public class RepositoryConfig {
-  
-  @Bean
-  public DataSource dataSource() {
-    
-    EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
 
-    return builder.setType(EmbeddedDatabaseType.HSQL).build();
-  }
+  @Autowired
+  DataSource dataSource;
 
   @Bean
+  @Primary
   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
     HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
@@ -36,14 +33,16 @@ public class RepositoryConfig {
 
     LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 
+    // TODO: Add shared caching here
     factory.setJpaVendorAdapter(vendorAdapter);
-    factory.setPackagesToScan("com.google.rolecall");
-    factory.setDataSource(dataSource());
+    factory.setPackagesToScan("com.google.rolecall.model");
+    factory.setDataSource(dataSource);
 
     return factory;
   }
 
   @Bean
+  @Primary
   public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
 
     JpaTransactionManager txManager = new JpaTransactionManager();
