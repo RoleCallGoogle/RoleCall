@@ -15,9 +15,11 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-/** Initializes the entity manager factory for all transactions. Does not initialize the datasoource which is setup via configurations.  */
+/** Initializes the entity manager factory for all transactions. 
+ *  Does NOT initialize the DataSource which is setup via configurations in application.properties.  
+ */
 @Configuration
-@EnableJpaRepositories
+@EnableJpaRepositories("com.google.rolecall.repos")
 @EnableTransactionManagement
 public class RepositoryConfig {
 
@@ -35,7 +37,7 @@ public class RepositoryConfig {
 
     // TODO: Add shared caching here
     factory.setJpaVendorAdapter(vendorAdapter);
-    factory.setPackagesToScan("com.google.rolecall.model");
+    factory.setPackagesToScan("com.google.rolecall.models");
     factory.setDataSource(dataSource);
 
     return factory;

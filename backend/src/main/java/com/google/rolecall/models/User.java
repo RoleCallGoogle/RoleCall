@@ -23,7 +23,7 @@ public class User {
 
   private int loginCount = 0;
 
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 
@@ -64,4 +64,7 @@ public class User {
     this.lastName = lName;
     this.email = email;
   }
+
+  // Required for spring reflective CRUD Repository call
+  public User() {}
 }
