@@ -21,6 +21,24 @@
     <maven.compiler.target>11</maven.compiler.target>
   </properties>
 
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <spring.profiles.active>dev</spring.profiles.active>
+      </properties>
+    </profile>
+    <profile>
+      <id>prod</id>
+      <properties>
+        <spring.profiles.active>prod</spring.profiles.active>
+      </properties>
+    </profile>
+  </profiles>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
