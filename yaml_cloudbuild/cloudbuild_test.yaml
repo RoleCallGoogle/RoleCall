@@ -19,10 +19,10 @@ steps:
 - id: build_and_deploy_backend
   name: "gcr.io/cloud-builders/mvn"
   args: ["-P", "prod", "-f", "backend/pom.xml", "-D", "skipTests", "clean", "package", "appengine:deploy"]
-  substitutions:
-    _DB_INSTANCE: rolecall-cloudsql
-    _DB_NAME: rolecall_db
-    _DB_USER: rolecall
+  env:
+    - '_DB_INSTANCE= rolecall-cloudsql'
+    - '_DB_NAME= rolecall_db'
+    - '_DB_USER= rolecall'
   waitFor:
   - get_db_password
   - set_backend_port
