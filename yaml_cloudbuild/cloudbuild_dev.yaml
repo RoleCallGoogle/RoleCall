@@ -19,7 +19,6 @@ steps:
     - '_DB_INSTANCE= rolecall-cloudsql'
     - '_DB_NAME= rolecall_db'
     - '_DB_USER= rolecall'
-    - 'SPRING_PROFILES_ACTIVE= prod'
   waitFor:
   - get_db_password
   - configure_yamls
