@@ -21,7 +21,6 @@ steps:
     - '_DB_USER= rolecall'
   waitFor:
   - get_db_password
-  - set_backend_port
   - configure_yamls
 
 # Install the npm packages for angular
