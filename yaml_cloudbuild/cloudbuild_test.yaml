@@ -19,15 +19,14 @@ steps:
 - id: build_and_deploy_backend
   name: "gcr.io/cloud-builders/mvn"
   args: ["-P", "prod", "-f", "backend/pom.xml", "-D", "skipTests", "clean", "package", "appengine:deploy"]
-  waitFor:
-  - get_db_password
-  - set_backend_port
-  - configure_yamls
   substitutions:
     _DB_INSTANCE: rolecall-cloudsql
     _DB_NAME: rolecall_db
     _DB_USER: rolecall
-    _DB_PASSWORD: {}
+  waitFor:
+  - get_db_password
+  - set_backend_port
+  - configure_yamls
 
 # Install the npm packages for angular
 - id: install_packages
