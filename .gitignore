@@ -4,5 +4,3 @@ backend/target/*
 backend/.vscode/*
 backend/.settings/*
 backend/.classpath
-backend/src/main/resources/application.properties
-
