@@ -1,6 +1,7 @@
 steps:
 # Get rolecall user password from secret key and add to environment
-- name: get_db_password
+- id: get_db_password
+  name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args: [ '-c', '_DB_PASSWORD=$(gcloud secrets versions access latest --secret=rolecall_user_password)' ]
 
