@@ -1,10 +1,10 @@
 steps:
-teps:
+# Get rolecall user password from secret key and add to environment
 - name: get_db_password
   entrypoint: 'bash'
   args: [ '-c', '_DB_PASSWORD=$(gcloud secrets versions access latest --secret=rolecall_user_password)' ]
 
-  # Use sed to set backend port to 8080 from testing port
+# Use sed to set backend port to 8080 from testing port
 - id: set_backend_port
   name: 'gcr.io/cloud-builders/npm'
   args: ["run", "configurePort"]
