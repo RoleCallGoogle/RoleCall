@@ -68,9 +68,7 @@ public class DataSourceConfig {
 
     try {
       SecretManagerServiceClient client = SecretManagerServiceClient.create();
-      ProjectName project = ProjectName.of(env.getProperty("spring.cloud.gcp.projectId"));
-      Secret passSecret = client.getSecret(env.getProperty("cloud.secret.name"));
-      SecretVersionName name = SecretVersionName.of(project.getProject(), passSecret.getName(), "latest");
+      SecretVersionName name = SecretVersionName.of("project-role-call-dev", "rolecall_user_password", "1");
 
       AccessSecretVersionResponse response = client.accessSecretVersion(name);
 
