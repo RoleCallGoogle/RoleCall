@@ -7,9 +7,8 @@
 # Clean and build the backend, then deploy to GAE backend service
 - id: build_and_deploy_backend
   name: "gcr.io/cloud-builders/mvn"
-  args: ["-P", "prod", "-f", "backend/pom.xml", "-D", "skipTests", "clean", "package", "appengine:deploy", "-Drun.arguments=--spring.datasource.password=$(gcloud secrets versions access latest --secret=rolecall_user_password)"]
+  args: ["-P", "prod", "-f", "backend/pom.xml", "-D", "skipTests", "clean", "package", "appengine:deploy"]
   waitFor:
-  - get_db_password
   - configure_yamls
 
 # Install the npm packages for angular
