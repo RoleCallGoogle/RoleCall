@@ -3,7 +3,7 @@ steps:
 - id: get_password
   name: gcr.io/cloud-builders/gcloud
   entrypoint: 'bash'
-  args: [ '-c', 'gcloud secrets versions access latest --secret=rolecall_user_password --format='get(payload.data)' | tr '_-' '/+' | base64 -d > password.txt' ]
+  args: [ '-c', "gcloud secrets versions access latest --secret=rolecall_user_password --format='get(payload.data)' | tr '_-' '/+' | base64 -d > password.txt" ]
 
 # Use sed to set backend port to 8080 from testing port
 - id: set_backend_port
