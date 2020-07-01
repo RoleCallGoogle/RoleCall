@@ -25,27 +25,27 @@ steps:
   - get_password
   - configure_yamls
 
-# Install the npm packages for angular
-- id: install_packages
-  name: 'gcr.io/cloud-builders/npm'
-  args:
-  - 'run'
-  - 'installAng'
+# # Install the npm packages for angular
+# - id: install_packages
+#   name: 'gcr.io/cloud-builders/npm'
+#   args:
+#   - 'run'
+#   - 'installAng'
 
-# Build the angular app for production and put the compiled
-# files in the dist/ folder
-- id: prerender_browser_files
-  name: 'gcr.io/cloud-builders/npm'
-  args:
-  - 'run'
-  - 'buildAng'
-  waitFor:
-  - install_packages
+# # Build the angular app for production and put the compiled
+# # files in the dist/ folder
+# - id: prerender_browser_files
+#   name: 'gcr.io/cloud-builders/npm'
+#   args:
+#   - 'run'
+#   - 'buildAng'
+#   waitFor:
+#   - install_packages
 
-# Deploy the angular app under the frontend service
-- name: "gcr.io/cloud-builders/gcloud"
-  args: ["app", "deploy", "app.yaml"]
-  waitFor:
-  - configure_yamls
-  - prerender_browser_files
+# # Deploy the angular app under the frontend service
+# - name: "gcr.io/cloud-builders/gcloud"
+#   args: ["app", "deploy", "app.yaml"]
+#   waitFor:
+#   - configure_yamls
+#   - prerender_browser_files
 timeout: "1600s"

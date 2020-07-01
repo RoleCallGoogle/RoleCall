@@ -2,6 +2,11 @@ package com.google.rolecall.config;
 
 import javax.sql.DataSource;
 
+import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
+import com.google.cloud.secretmanager.v1.ProjectName;
+import com.google.cloud.secretmanager.v1.Secret;
+import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
+import com.google.cloud.secretmanager.v1.SecretVersionName;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -43,7 +48,7 @@ public class DataSourceConfig {
   public DataSource getDataSourceCloudSql() {
     String dbName = env.getProperty("spring.cloud.gcp.sql.databaseName");
     String userName = env.getProperty("spring.datasource.username");
-    String password = env.getProperty("spring.datasource.password");
+    String password = getCloudDBPassword(); env.getProperty("spring.datasource.password");
     String cloudSqlInstance = env.getProperty("spring.cloud.gcp.sql.instance-connection-name");;
 
     HikariConfig config = new HikariConfig();
@@ -56,5 +61,25 @@ public class DataSourceConfig {
     config.addDataSourceProperty("cloudSqlInstance", cloudSqlInstance);
 
     return new HikariDataSource(config);
+  }
+
+  private String getCloudDBPassword() {
+    String password;
+
+    try {
+      SecretManagerServiceClient client = SecretManagerServiceClient.create();
+      ProjectName project = ProjectName.of(env.getProperty("spring.cloud.gcp.projectId"));
+      Secret passSecret = client.getSecret(env.getProperty("cloud.secret.name"));
+      SecretVersionName name = SecretVersionName.of(project.getProject(), passSecret.getName(), "latest");
+
+      AccessSecretVersionResponse response = client.accessSecretVersion(name);
+
+      password = response.getPayload().getData().toStringUtf8();
+
+    } catch (Exception e) {
+      throw new Error(e);
+    }
+
+    return password;
   }
 }
