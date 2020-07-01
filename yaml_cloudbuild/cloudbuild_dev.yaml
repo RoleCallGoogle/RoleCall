@@ -1,10 +1,4 @@
 steps:
-# Get Password for database
-- id: get_password
-  name: gcr.io/cloud-builders/gcloud
-  entrypoint: 'bash'
-  args: [ '-c', "gcloud secrets versions access latest --secret=rolecall_user_password --format='get(payload.data)' | tr '_-' '/+' | base64 -d > password.txt" ]
-
 # Use sed to set backend port to 8080 from testing port
 - id: set_backend_port
   name: 'gcr.io/cloud-builders/npm'
@@ -19,10 +13,8 @@ steps:
 # Clean and build the backend, then deploy to GAE backend service
 - id: build_and_deploy_backend
   name: "gcr.io/cloud-builders/mvn"
-  args: ["-P", "prod", "-f", "backend/pom.xml", "-D", "skipTests", "clean", "package", "appengine:deploy",
-  "-Drun.arguments=--spring.datasource.password < password.txt"]
+  args: ["-P", "prod", "-f", "backend/pom.xml", "-D", "skipTests", "clean", "package", "appengine:deploy"]
   waitFor:
-  - get_password
   - configure_yamls
 
 # # Install the npm packages for angular
