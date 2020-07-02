@@ -71,9 +71,9 @@ public class DataSourceConfig {
       SecretVersionName name = SecretVersionName.of("project-role-call-dev", "rolecall_user_password", "latest");
 
       AccessSecretVersionResponse response = client.accessSecretVersion(name);
+      System.out.println(response.toStringUtf8());
 
       password = response.getPayload().getData().toStringUtf8();
-
     } catch (Exception e) {
       throw new Error(e);
     }
