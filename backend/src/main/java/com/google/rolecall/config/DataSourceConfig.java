@@ -51,10 +51,9 @@ public class DataSourceConfig {
     String password = getCloudDBPassword();
     String cloudSqlInstance = env.getProperty("spring.cloud.gcp.sql.instance-connection-name");
 
-    // jdbc:mysql://%s/%s?cloudSqlInstance=%s, public IP, databaseName, user_name
     HikariConfig config = new HikariConfig();
 
-    config.setJdbcUrl(String.format("jdbc:mysql://sqladmin.googleapis.com/sql/v1beta4/projects/project-role-call-dev/instances/rolecall-cloudsql/%s", dbName));
+    config.setJdbcUrl(String.format("jdbc:mysql:///%s", "rolecall-cloudsql"));
     config.setUsername(userName);
     config.setPassword(password);
 
