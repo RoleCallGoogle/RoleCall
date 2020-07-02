@@ -54,7 +54,7 @@ public class DataSourceConfig {
     // jdbc:mysql://%s/%s?cloudSqlInstance=%s, public IP, databaseName, user_name
     HikariConfig config = new HikariConfig();
 
-    config.setJdbcUrl(String.format("jdbc:mysql://%s/%s", "35.230.170.2", dbName));
+    config.setJdbcUrl(String.format("jdbc:mysql://https://sqladmin.googleapis.com/sql/v1beta4/projects/project-role-call-dev/instances/rolecall-cloudsql/%s", dbName));
     config.setUsername(userName);
     config.setPassword(password);
 
