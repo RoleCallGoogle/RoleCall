@@ -47,13 +47,16 @@ public class DataSourceConfig {
   @Bean
   public DataSource getDataSourceCloudSql() {
     String dbName = env.getProperty("spring.cloud.gcp.sql.databaseName");
+
     String userName = env.getProperty("spring.datasource.username");
     String password = getCloudDBPassword();
+
     String cloudSqlInstance = env.getProperty("spring.cloud.gcp.sql.instance-connection-name");
 
     HikariConfig config = new HikariConfig();
 
-    config.setJdbcUrl(String.format("jdbc:mysql:///%s", "rolecall_db"));
+    config.setJdbcUrl(String.format("jdbc:mysql:///%s", dbName));
+    
     config.setUsername(userName);
     config.setPassword(password);
 
