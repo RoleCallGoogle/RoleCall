@@ -68,7 +68,7 @@ public class DataSourceConfig {
 
     try {
       SecretManagerServiceClient client = SecretManagerServiceClient.create();
-      SecretVersionName name = SecretVersionName.of("project-role-call-dev", "rolecall_user_password", "1");
+      SecretVersionName name = SecretVersionName.of("project-role-call-dev", "rolecall_user_password", "latest");
 
       AccessSecretVersionResponse response = client.accessSecretVersion(name);
 
