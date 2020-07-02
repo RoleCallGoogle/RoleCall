@@ -53,7 +53,7 @@ public class DataSourceConfig {
 
     HikariConfig config = new HikariConfig();
 
-    config.setJdbcUrl(String.format("jdbc:mysql:///%s", "rolecall-cloudsql"));
+    config.setJdbcUrl(String.format("jdbc:mysql:///%s", "rolecall_db"));
     config.setUsername("testuser");
     config.setPassword("testuser");
 
