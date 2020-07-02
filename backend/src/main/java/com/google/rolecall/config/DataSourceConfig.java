@@ -54,8 +54,8 @@ public class DataSourceConfig {
     HikariConfig config = new HikariConfig();
 
     config.setJdbcUrl(String.format("jdbc:mysql:///%s", "rolecall-cloudsql"));
-    config.setUsername(userName);
-    config.setPassword(password);
+    config.setUsername("testuser");
+    config.setPassword("testuser");
 
     config.addDataSourceProperty("socketFactory", "com.google.cloud.sql.mysql.SocketFactory");
     config.addDataSourceProperty("cloudSqlInstance", cloudSqlInstance);
