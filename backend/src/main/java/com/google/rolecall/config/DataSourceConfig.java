@@ -55,7 +55,7 @@ public class DataSourceConfig {
 
     config.setJdbcUrl(String.format("jdbc:mysql:///%s", "rolecall-cloudsql"));
     config.setUsername(userName);
-    config.setPassword(password);
+    // config.setPassword(password);
 
     config.addDataSourceProperty("socketFactory", "com.google.cloud.sql.mysql.SocketFactory");
     config.addDataSourceProperty("cloudSqlInstance", cloudSqlInstance);
