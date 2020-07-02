@@ -54,8 +54,8 @@ public class DataSourceConfig {
     HikariConfig config = new HikariConfig();
 
     config.setJdbcUrl(String.format("jdbc:mysql:///%s", "rolecall_db"));
-    config.setUsername("testuser");
-    config.setPassword("testuser");
+    config.setUsername(userName);
+    config.setPassword(password);
 
     config.addDataSourceProperty("socketFactory", "com.google.cloud.sql.mysql.SocketFactory");
     config.addDataSourceProperty("cloudSqlInstance", cloudSqlInstance);
@@ -71,7 +71,6 @@ public class DataSourceConfig {
       SecretVersionName name = SecretVersionName.of("project-role-call-dev", "rolecall_user_password", "latest");
 
       AccessSecretVersionResponse response = client.accessSecretVersion(name);
-      System.out.println(response.toString());
 
       password = response.getPayload().getData().toStringUtf8();
     } catch (Exception e) {
