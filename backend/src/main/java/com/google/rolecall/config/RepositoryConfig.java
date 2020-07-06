@@ -15,8 +15,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-/** Initializes the entity manager factory for all transactions. 
- *  Initializes datasource in prod through configurations from application-prod.properties
+/** Initializes the entity manager factory for all transactions.
  *  Does NOT initialize the DataSource which is setup via configurations in application-dev.properties in Dev.  
  */
 @Configuration

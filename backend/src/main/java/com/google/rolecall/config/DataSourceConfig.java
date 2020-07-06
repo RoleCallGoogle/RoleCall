@@ -15,6 +15,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 
+/**
+ * Configures the database connection as a DataSource object through profile specific inititializing functions:
+ * Dev - Conncects to a mysql database given valid spring.datasource.url, spring.datasource.username,
+ * spring.datasource.password found in application-dev.properties.
+ * Prod - Connects to a cloud sql mysql database when the server is running on a GCP App Engine 
+ * instance located in the same project. Requires a secret in the secret manager containing the
+ * database password in addition to spring.cloud.gcp.sql.databaseName, spring.datasource.username,
+ * and spring.cloud.gcp.sql.instance-connection-name found through application-prod.properties.
+ */
 @Configuration
 public class DataSourceConfig {
 
@@ -64,12 +73,18 @@ public class DataSourceConfig {
     return new HikariDataSource(config);
   }
 
+  /**
+   * Fetches the latest version of the cloud sql database password from the GCP secret manager
+   * through a given project id and secret name (set in application-prod.properties).
+   */
   private String getCloudDBPassword() {
     String password;
+    String projectId = env.getProperty("spring.cloud.gcp.projectId");
+    String secretName = env.getProperty("cloud.secret.name");
 
     try {
       SecretManagerServiceClient client = SecretManagerServiceClient.create();
-      SecretVersionName name = SecretVersionName.of("project-role-call-dev", "rolecall_user_password", "latest");
+      SecretVersionName name = SecretVersionName.of(projectId, secretName, "latest");
 
       AccessSecretVersionResponse response = client.accessSecretVersion(name);
 
