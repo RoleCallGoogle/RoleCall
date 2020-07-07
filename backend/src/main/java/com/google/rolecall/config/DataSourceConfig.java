@@ -1,13 +1,11 @@
 package com.google.rolecall.config;
 
-import javax.sql.DataSource;
-
 import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
 import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
 import com.google.cloud.secretmanager.v1.SecretVersionName;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -16,10 +14,11 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 
 /**
- * Configures the database connection as a DataSource object through profile specific inititializing functions:
- * Dev - Conncects to a mysql database given valid spring.datasource.url, spring.datasource.username,
- * spring.datasource.password found in application-dev.properties.
- * Prod - Connects to a cloud sql mysql database when the server is running on a GCP App Engine 
+ * Configures the database connection as a DataSource object through profile specific
+ * inititializing functions:
+ * Dev - Conncects to a mysql database given valid spring.datasource.url, 
+ * spring.datasource.username, spring.datasource.password found in application-dev.properties.
+ * Prod - Connects to a cloud sql mysql database when the server is running on a GCP App Engine
  * instance located in the same project. Requires a secret in the secret manager containing the
  * database password in addition to spring.cloud.gcp.sql.databaseName, spring.datasource.username,
  * and spring.cloud.gcp.sql.instance-connection-name found through application-prod.properties.
@@ -56,7 +55,7 @@ public class DataSourceConfig {
     String dbName = env.getProperty("spring.cloud.gcp.sql.databaseName");
 
     String userName = env.getProperty("spring.datasource.username");
-    String password = getCloudDBPassword();
+    String password = getCloudDbPassword();
 
     String cloudSqlInstance = env.getProperty("spring.cloud.gcp.sql.instance-connection-name");
 
@@ -77,7 +76,7 @@ public class DataSourceConfig {
    * Fetches the latest version of the cloud sql database password from the GCP secret manager
    * through a given project id and secret name (set in application-prod.properties).
    */
-  private String getCloudDBPassword() {
+  private String getCloudDbPassword() {
     String password;
     String projectId = env.getProperty("spring.cloud.gcp.projectId");
     String secretName = env.getProperty("cloud.secret.name");

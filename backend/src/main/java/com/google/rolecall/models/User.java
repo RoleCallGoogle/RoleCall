@@ -66,5 +66,6 @@ public class User {
   }
 
   // Required for spring reflective CRUD Repository call
-  public User() {}
+  public User() {
+  }
 }

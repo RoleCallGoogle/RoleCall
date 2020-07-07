@@ -3,7 +3,6 @@ package com.google.rolecall.config;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +15,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /** Initializes the entity manager factory for all transactions.
- *  Does NOT initialize the DataSource which is setup via configurations in application-dev.properties in Dev.  
+ *  Does NOT initialize the DataSource which is setup via configurations in 
+ *  application-dev.properties in Dev.  
  */
 @Configuration
 @EnableJpaRepositories("com.google.rolecall.repos")

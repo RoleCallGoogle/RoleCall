@@ -1,6 +1,6 @@
 package com.google.rolecall.restcontrollers;
 
-/** Custom exceptions for handling invalid request based errors */
+/** Custom exceptions for handling invalid request based errors. */
 public final class RequestExceptions {
   
   public static class InvalidArgumentException extends Exception{
