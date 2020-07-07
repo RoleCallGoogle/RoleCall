@@ -59,9 +59,9 @@ public class User {
     loginCount++;
   }
 
-  public User(String fName, String lName, String email) {
-    this.firstName =fName;
-    this.lastName = lName;
+  public User(String firstName, String lastName, String email) {
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.email = email;
   }
 

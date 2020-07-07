@@ -1,11 +1,9 @@
 package com.google.rolecall;
 
-import java.net.InetAddress;
-import java.util.Optional;
-
 import com.google.rolecall.models.User;
 import com.google.rolecall.repos.UserRepository;
-
+import java.net.InetAddress;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
