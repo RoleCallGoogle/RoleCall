@@ -51,12 +51,12 @@ public class IncrementUserLoginUnitTests {
     
     // Execute
     boolean isCorrectException = controller.getUserLoginCounter(4)
-    .handle((msg, ex) -> {
-      if (ex instanceof InvalidArgumentException) {
-        return true;
-      }
-      return false;
-    }).get();
+        .handle((msg, ex) -> {
+          if (ex instanceof InvalidArgumentException) {
+            return true;
+          }
+          return false;
+        }).get();
     
     // Assert
     assert(isCorrectException);
@@ -69,5 +69,20 @@ public class IncrementUserLoginUnitTests {
 
     // Assert
     assert(response).equals(2);
+  }
+
+  @Test
+  public void incrementInvailidUserLoginValue_failure() throws Exception {
+    // Execute
+    boolean isCorrectException = controller.postIncrementUserLogin(4)
+        .handle((msg, ex) -> {
+          if (ex instanceof InvalidArgumentException) {
+            return true;
+          }
+          return false;
+        }).get();;
+
+    // Assert
+    assert(isCorrectException);
   }
 }

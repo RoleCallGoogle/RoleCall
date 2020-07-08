@@ -18,11 +18,8 @@ public class ApplicationLoader implements ApplicationRunner {
 
   private Logger logger = Logger.getLogger(ApplicationLoader.class.getName());
   
-  @Autowired
-  private Environment environment;
-
-  @Autowired
-  private UserRepository userRepo;
+  private final Environment environment;
+  private final UserRepository userRepo;
   private String adminFirstName;
   private String adminLastName;
   private String adminEmail;
@@ -48,5 +45,11 @@ public class ApplicationLoader implements ApplicationRunner {
     userRepo.save(new User(adminFirstName, adminLastName, adminEmail));
     logger.log(Level.WARNING, String.format("Admin User Created: %s %s %s", 
         adminFirstName, adminLastName, adminEmail));
+  }
+
+  @Autowired
+  public ApplicationLoader(Environment env, UserRepository userRepo) {
+    this.environment = env;
+    this.userRepo = userRepo;
   }
 }
