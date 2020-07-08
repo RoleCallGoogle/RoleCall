@@ -53,6 +53,7 @@ public class DataSourceUnitTests {
       assert(src.getUsername()).equals(username);
       assert(src.getPassword()).equals(password);
       assert(src.getJdbcUrl()).equals(url);
+      src.close();
       return;
     }
     fail();

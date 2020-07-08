@@ -2,8 +2,9 @@ package com.google.rolecall;
 
 import com.google.rolecall.models.User;
 import com.google.rolecall.repos.UserRepository;
-import java.net.InetAddress;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Component;
 /** Methods to be run before and after the server loads. */
 @Component
 public class ApplicationLoader implements ApplicationRunner {
+
+  private Logger logger = Logger.getLogger(ApplicationLoader.class.getName());
   
   @Autowired
   private Environment environment;
@@ -27,10 +30,6 @@ public class ApplicationLoader implements ApplicationRunner {
   @Profile({"dev","prod"})
   @Override
   public void run(ApplicationArguments args) throws Exception {
-    System.out.println("Hostname: " + environment.getProperty("java.rmi.server.hostname"));
-    System.out.println("Port: " + environment.getProperty("server.port"));
-    System.out.println("Address: " + InetAddress.getLocalHost().getHostAddress());
-
     // Initialize admin if neccessary
     adminFirstName = environment.getProperty("admin.first.name");
     adminLastName = environment.getProperty("admin.last.name");
@@ -41,13 +40,13 @@ public class ApplicationLoader implements ApplicationRunner {
   }
 
   private void adminExists(User user) {
-    System.out.println(String.format("Admin User already exists: %s %s %s", 
+    logger.log(Level.INFO, String.format("Admin User already exists: %s %s %s", 
         user.getFirstName(), user.getLastName(), user.getEmail()));
   }
 
   private void createAdmin() {
     userRepo.save(new User(adminFirstName, adminLastName, adminEmail));
-    System.out.println(String.format("Admin User Created: %s %s %s", 
+    logger.log(Level.WARNING, String.format("Admin User Created: %s %s %s", 
         adminFirstName, adminLastName, adminEmail));
   }
 }
