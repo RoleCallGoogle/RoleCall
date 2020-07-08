@@ -14,17 +14,14 @@ import org.springframework.stereotype.Component;
 /** Methods to be run before and after the server loads. */
 @Component
 public class ApplicationLoader implements ApplicationRunner {
-
+  
   @Autowired
   private Environment environment;
 
   @Autowired
   private UserRepository userRepo;
-
   private String adminFirstName;
-
   private String adminLastName;
-
   private String adminEmail;
 
   @Profile({"dev","prod"})
