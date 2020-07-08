@@ -24,10 +24,12 @@ import org.springframework.core.env.Environment;
  * and spring.cloud.gcp.sql.instance-connection-name found through application-prod.properties.
  */
 @Configuration
+@Profile({"dev","prod"})
 public class DataSourceConfig {
 
-  @Autowired
-  Environment env;
+  private final Environment env;
+
+  private SecretManagerServiceClient client;
 
   @Profile("dev")
   @Bean
@@ -82,7 +84,9 @@ public class DataSourceConfig {
     String secretName = env.getProperty("cloud.secret.name");
 
     try {
-      SecretManagerServiceClient client = SecretManagerServiceClient.create();
+      if (client == null) {
+        client = SecretManagerServiceClient.create();
+      }
       SecretVersionName name = SecretVersionName.of(projectId, secretName, "latest");
 
       AccessSecretVersionResponse response = client.accessSecretVersion(name);
@@ -93,5 +97,15 @@ public class DataSourceConfig {
     }
 
     return password;
+  }
+
+  @Autowired
+  public DataSourceConfig(Environment env) {
+    this.env = env;
+  }
+
+  public DataSourceConfig(Environment env, SecretManagerServiceClient client) {
+    this.env = env;
+    this.client = client;
   }
 }

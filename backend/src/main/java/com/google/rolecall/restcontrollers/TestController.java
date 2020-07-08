@@ -5,6 +5,7 @@ import java.util.concurrent.CompletableFuture;
 import com.google.rolecall.restcontrollers.Annotations.Get;
 import com.google.rolecall.restcontrollers.Annotations.Post;
 import com.google.rolecall.restcontrollers.Annotations.Endpoint;
+import com.google.rolecall.restcontrollers.RequestExceptions.UnsupportedOperationException;
 
 import org.springframework.web.bind.annotation.RequestParam;
 

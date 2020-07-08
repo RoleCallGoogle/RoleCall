@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +27,7 @@ public class ApplicationLoader implements ApplicationRunner {
 
   private String adminEmail;
 
+  @Profile({"dev","prod"})
   @Override
   public void run(ApplicationArguments args) throws Exception {
     System.out.println("Hostname: " + environment.getProperty("java.rmi.server.hostname"));

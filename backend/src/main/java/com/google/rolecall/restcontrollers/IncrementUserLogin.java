@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Endpoint("/api/increment-login")
 public class IncrementUserLogin extends AsyncRestEndpoint{
   
-  @Autowired
-  private UserRepository userRepo;
+  private final UserRepository userRepo;
   
   @Get
   public CompletableFuture<Integer> getUserLoginCounter(@RequestParam(value="userid", 
@@ -44,5 +43,10 @@ public class IncrementUserLogin extends AsyncRestEndpoint{
 
     userRepo.save(user);
     return CompletableFuture.completedFuture(user.getLoginCount());
+  }
+
+  @Autowired
+  public IncrementUserLogin(UserRepository userRepo) {
+    this.userRepo = userRepo;
   }
 }
