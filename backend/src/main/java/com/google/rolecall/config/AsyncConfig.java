@@ -1,11 +1,11 @@
 package com.google.rolecall.config;
 
 import java.util.concurrent.Executor;
-
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.aop.interceptor.SimpleAsyncUncaughtExceptionHandler;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -18,27 +18,18 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @Configuration
 public class AsyncConfig implements AsyncConfigurer {
 
-  @Value("${thread.pool.size}")
-  private int poolSize;
-
-  @Value("${max.queue.capacity}")
-  private int queueCapacity;
-
-  @Value("${allow.core.thread.timeout}")
-  private boolean threadTimeout;
-
-  @Value("${wait.for.task.completion.on.shutdown}")
-  private boolean waitTaskCompleteOnShutdown;
-
-  @Value("${await.termination}")
-  private int awaitTermination;
-
-  @Value("${thread.name.prefix}")
-  private String threadNamePrefix;
-  
+  private final Environment env;
 
   @Override
   public Executor getAsyncExecutor() {
+    int poolSize = Integer.parseInt(env.getProperty("thread.pool.size"));
+    int queueCapacity = Integer.parseInt(env.getProperty("max.queue.capacity"));
+    boolean threadTimeout = Boolean.parseBoolean(env.getProperty("allow.core.thread.timeout"));
+    boolean waitTaskCompleteOnShutdown = Boolean.parseBoolean(
+        env.getProperty("wait.for.task.completion.on.shutdown"));
+    int awaitTermination = Integer.parseInt(env.getProperty("await.termination"));
+    String threadNamePrefix = env.getProperty("thread.name.prefix");
+
     ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
     
     executor.setQueueCapacity(queueCapacity);
@@ -57,5 +48,10 @@ public class AsyncConfig implements AsyncConfigurer {
   public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
     // TODO: Make comprehensive expetion handler
     return new SimpleAsyncUncaughtExceptionHandler();
+  }
+
+  @Autowired
+  public AsyncConfig(Environment env) {
+    this.env = env;
   }
 }
