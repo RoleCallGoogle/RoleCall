@@ -1,11 +1,13 @@
 package com.google.rolecall.config;
 
+import com.google.api.gax.rpc.ApiException;
 import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
 import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
 import com.google.cloud.secretmanager.v1.SecretVersionName;
 import com.google.common.annotations.VisibleForTesting;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import java.io.IOException;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -83,9 +85,14 @@ public class DataSourceConfig {
     String secretName = env.getProperty("cloud.secret.name");
     try {
       password = getSecretResponse(projectId, secretName).getPayload().getData().toStringUtf8();
+    } catch (IOException e) {
+      throw new Error("Unable to access secret manager. " + 
+          "Applications calling this method should be run on App Engine.");
+    } catch (ApiException e) {
+      throw new Error("Unable to get cloud db password. Call for password failed. " + 
+          "Check spring.cloud.gcp.projectId and cloud.secret.name for correctness.");
     } catch (Exception e) {
-      // TODO: Create Excpetion specific cases
-      throw new Error(e);
+      throw new UnknownError("Failed to get cloud db password for UNKNOWN reason: \n" + e.getMessage());
     }
 
     return password;
