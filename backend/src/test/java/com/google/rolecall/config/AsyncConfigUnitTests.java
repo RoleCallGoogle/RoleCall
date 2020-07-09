@@ -5,13 +5,15 @@ import static com.google.common.truth.Truth.assertThat;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+import org.springframework.aop.interceptor.SimpleAsyncUncaughtExceptionHandler;
 import org.springframework.mock.env.MockEnvironment;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
-public class AsyncConfigTests {
+public class AsyncConfigUnitTests {
   
   @Test
   public void getAsyncExecutor_success() throws Exception {
@@ -42,5 +44,18 @@ public class AsyncConfigTests {
     assert(String.valueOf(executor.getMaxPoolSize())).equals(poolSize);
     assert(executor.getThreadNamePrefix()).equals(threadNamePrefix);
     executor.shutdown();
+  }
+
+  @Test
+  public void getAsyncUncaughtExceptionHandler_success() throws Exception {
+     // Setup
+     MockEnvironment env = new MockEnvironment();
+     AsyncConfig config = new AsyncConfig(env);
+
+    // Execute
+    AsyncUncaughtExceptionHandler handler = config.getAsyncUncaughtExceptionHandler();
+
+    // Assert
+    assertThat(handler).isInstanceOf(SimpleAsyncUncaughtExceptionHandler.class);
   }
 }
