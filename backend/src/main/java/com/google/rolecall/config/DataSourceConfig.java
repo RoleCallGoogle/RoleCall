@@ -18,7 +18,6 @@ import org.springframework.core.env.Environment;
  * inititializing functions.
  */
 @Configuration
-@Profile({"dev","prod"})
 public class DataSourceConfig {
 
   private final Environment env;
