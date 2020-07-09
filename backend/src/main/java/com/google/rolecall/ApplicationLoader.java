@@ -27,12 +27,14 @@ public class ApplicationLoader implements ApplicationRunner {
   @Profile({"dev","prod"})
   @Override
   public void run(ApplicationArguments args) throws Exception {
-    // Initialize admin if neccessary
+    // Initialize admin if exists, or create one with given information.
     adminFirstName = environment.getProperty("admin.first.name");
     adminLastName = environment.getProperty("admin.last.name");
     adminEmail = environment.getProperty("admin.email");
+    
     Optional<User> possibleAdmin = userRepo.findByFirstNameAndLastNameAndEmailIgnoreCase(
         adminFirstName, adminLastName, adminEmail);
+        
     possibleAdmin.ifPresentOrElse(this::adminExists, this::createAdmin);
   }
 
