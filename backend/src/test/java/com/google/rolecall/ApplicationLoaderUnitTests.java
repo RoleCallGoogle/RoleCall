@@ -1,6 +1,5 @@
-package com.google.rolecall.unit;
+package com.google.rolecall;
 
-import com.google.rolecall.ApplicationLoader;
 import com.google.rolecall.models.User;
 import com.google.rolecall.repos.UserRepository;
 import java.util.Optional;

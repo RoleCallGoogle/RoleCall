@@ -1,6 +1,5 @@
-package com.google.rolecall.unit;
+package com.google.rolecall.models;
 
-import com.google.rolecall.models.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
