@@ -16,7 +16,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 
-/**Configures the database connection as a DataSource object through profile specific
+/*
+ * Configures the database connection as a DataSource object through profile specific
  * inititializing functions.
  */
 @Configuration
