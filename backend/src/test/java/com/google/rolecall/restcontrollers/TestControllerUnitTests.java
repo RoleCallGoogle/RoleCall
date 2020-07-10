@@ -1,5 +1,6 @@
 package com.google.rolecall.restcontrollers;
 
+import static com.google.common.truth.Truth.assertThat;
 import com.google.rolecall.restcontrollers.RequestExceptions.UnsupportedOperationException;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +26,7 @@ public class TestControllerUnitTests {
     String response = controller.sayHello("Jared").get();
 
     // Assert
-    assert(response).equals("Hello Jared");
+    assertThat(response).isEqualTo("Hello Jared");
   }
 
   @Test
@@ -34,6 +35,6 @@ public class TestControllerUnitTests {
     UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, controller::throwException);
 
     // Assert
-    assert(ex.getMessage()).equals("POST is not defined for this endpoint");
+    assertThat(ex).hasMessageThat().isEqualTo("POST is not defined for this endpoint");
   }
 }

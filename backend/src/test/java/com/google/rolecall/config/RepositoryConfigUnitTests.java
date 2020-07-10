@@ -34,7 +34,7 @@ public class RepositoryConfigUnitTests {
     LocalContainerEntityManagerFactoryBean factory = config.entityManagerFactory();
 
     // Assert
-    assert(factory.getDataSource()).equals(dataSource);
+    assertThat(factory.getDataSource()).isEqualTo(dataSource);
     assertThat(factory.getJpaVendorAdapter()).isInstanceOf(HibernateJpaVendorAdapter.class);
   }
 
@@ -48,6 +48,6 @@ public class RepositoryConfigUnitTests {
     
     // Assert
     assertThat(txnManager).isInstanceOf(JpaTransactionManager.class);
-    assert(((JpaTransactionManager) txnManager).getEntityManagerFactory()).equals(factory);
+    assertThat(((JpaTransactionManager) txnManager).getEntityManagerFactory()).isEqualTo(factory);
   }
 }

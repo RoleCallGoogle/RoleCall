@@ -1,5 +1,6 @@
 package com.google.rolecall.restcontrollers;
 
+import static com.google.common.truth.Truth.assertThat;
 import com.google.rolecall.models.User;
 import com.google.rolecall.repos.UserRepository;
 import com.google.rolecall.restcontrollers.RequestExceptions.InvalidArgumentException;
@@ -41,8 +42,8 @@ public class IncrementUserLoginUnitTests {
     Integer response2 = controller.getUserLoginCounter(3).get();
     
     // Assert
-    assert(response1).equals(1);
-    assert(response2).equals(3);
+    assertThat(response1).isEqualTo(1);
+    assertThat(response2).isEqualTo(3);
   }
 
   @Test
@@ -58,7 +59,7 @@ public class IncrementUserLoginUnitTests {
         }).get();
     
     // Assert
-    assert(isCorrectException);
+    assertThat(isCorrectException).isTrue();
   }
 
   @Test
@@ -67,7 +68,7 @@ public class IncrementUserLoginUnitTests {
     Integer response = controller.postIncrementUserLogin(1).get();
 
     // Assert
-    assert(response).equals(2);
+    assertThat(response).isEqualTo(2);
   }
 
   @Test
@@ -82,6 +83,6 @@ public class IncrementUserLoginUnitTests {
         }).get();;
 
     // Assert
-    assert(isCorrectException);
+    assertThat(isCorrectException).isTrue();
   }
 }

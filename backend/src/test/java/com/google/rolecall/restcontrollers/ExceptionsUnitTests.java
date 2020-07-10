@@ -1,5 +1,6 @@
 package com.google.rolecall.restcontrollers;
 
+import static com.google.common.truth.Truth.assertThat;
 import com.google.rolecall.restcontrollers.RequestExceptions.InvalidArgumentException;
 import com.google.rolecall.restcontrollers.RequestExceptions.InvalidPermissionsException;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ public class ExceptionsUnitTests {
     InvalidPermissionsException ex = new InvalidPermissionsException("Issue Description");
 
     //Assert
-    assert(ex.getMessage()).equals("Issue Description");
+    assertThat(ex).hasMessageThat().isEqualTo("Issue Description");
   }  
   
   @Test
@@ -26,7 +27,7 @@ public class ExceptionsUnitTests {
     InvalidArgumentException ex = new InvalidArgumentException("Issue Description");
 
     //Assert
-    assert(ex.getMessage()).equals("Issue Description");
+    assertThat(ex).hasMessageThat().isEqualTo("Issue Description");
   }
 
   @Test
@@ -35,6 +36,6 @@ public class ExceptionsUnitTests {
     UnsupportedOperationException ex = new UnsupportedOperationException("Issue Description");
 
     //Assert
-    assert(ex.getMessage()).equals("Issue Description");
+    assertThat(ex).hasMessageThat().isEqualTo("Issue Description");
   }
 }

@@ -1,5 +1,6 @@
 package com.google.rolecall.models;
 
+import static com.google.common.truth.Truth.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,7 +36,7 @@ public class UserUnitTests {
     user.setLastName("NotHirsch");
 
     // Assert
-    assert(user.getLastName()).equals("NotHirsch");
+    assertThat(user.getLastName()).isEqualTo("NotHirsch");
   }
 
   @Test
@@ -44,13 +45,13 @@ public class UserUnitTests {
     user.setEmail("Notemail@email.com");
 
     // Assert
-    assert(user.getEmail()).equals("Notemail@email.com");
+    assertThat(user.getEmail()).isEqualTo("Notemail@email.com");
   }
 
   /** A User object created but not saved to the database should not have an id. */
   @Test
   public void getId_failure() throws Exception {
     // Assert
-    assert(user.getId() == null);
+    assertThat(user.getId()).isNull();
   }
 }

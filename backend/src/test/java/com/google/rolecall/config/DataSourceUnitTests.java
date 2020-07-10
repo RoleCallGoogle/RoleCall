@@ -62,9 +62,9 @@ public class DataSourceUnitTests {
     // Assert
     assertThat(result).isInstanceOf(HikariDataSource.class);
     HikariDataSource src = (HikariDataSource) result;
-    assert(src.getUsername()).equals(username);
-    assert(src.getPassword()).equals(password);
-    assert(src.getJdbcUrl()).equals(url);
+    assertThat(src.getUsername()).isEqualTo(username);
+    assertThat(src.getPassword()).isEqualTo(password);
+    assertThat(src.getJdbcUrl()).isEqualTo(url);
     src.close();
   }
 
@@ -85,9 +85,9 @@ public class DataSourceUnitTests {
     HikariConfig result = config.getCloudConfig();
 
     // Assert
-    assert(result.getUsername()).equals(username);
-    assert(result.getPassword()).equals(password);
-    assert(result.getJdbcUrl()).equals(String.format("jdbc:mysql:///%s", dbName));
+    assertThat(result.getUsername()).isEqualTo(username);
+    assertThat(result.getPassword()).isEqualTo(password);
+    assertThat(result.getJdbcUrl()).isEqualTo(String.format("jdbc:mysql:///%s", dbName));
   }
 
   @Test
@@ -99,7 +99,7 @@ public class DataSourceUnitTests {
     RuntimeException ex = assertThrows(RuntimeException.class, config::getCloudConfig);
 
     // Assert
-    assert(ex.getMessage()).equals("Unable to access secret manager. "
+    assertThat(ex).hasMessageThat().isEqualTo("Unable to access secret manager. "
       + "Applications calling this method should be run on App Engine.");
   }
 
@@ -112,7 +112,7 @@ public class DataSourceUnitTests {
     RuntimeException ex = assertThrows(RuntimeException.class, config::getCloudConfig);
 
     // Assert
-    assert(ex.getMessage()).equals("Unable to get cloud db password. Call for password failed."
+    assertThat(ex).hasMessageThat().isEqualTo("Unable to get cloud db password. Call for password failed."
         + " Check spring.cloud.gcp.projectId and cloud.secret.name for correctness.");
   }
 
@@ -127,7 +127,7 @@ public class DataSourceUnitTests {
     RuntimeException ex = assertThrows(RuntimeException.class, config::getCloudConfig);
 
     // Assert
-    assert(ex.getMessage()).equals("Failed to get cloud db password for UNKNOWN reason: \n"
+    assertThat(ex).hasMessageThat().isEqualTo("Failed to get cloud db password for UNKNOWN reason: \n"
         + "Error message");
   }
 }
