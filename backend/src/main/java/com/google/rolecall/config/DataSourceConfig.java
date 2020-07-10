@@ -46,7 +46,8 @@ public class DataSourceConfig {
     return dataSourceBuilder.build();
   }
 
-  /** Connects to a cloud sql mysql database when the server is running on a GCP App Engine
+  / *
+    * Connects to a cloud sql mysql database when the server is running on a GCP App Engine
     * instance located in the same project. Requires a secret in the secret manager containing the
     * database password in addition to spring.cloud.gcp.sql.databaseName, 
     * spring.datasource.username, and spring.cloud.gcp.sql.instance-connection-name found through 
