@@ -24,7 +24,8 @@ public class DataSourceConfig {
 
   private final Environment env;
 
-  /**Conncects to a mysql database given valid spring.datasource.url, 
+  /*
+   * Conncects to a mysql database given valid spring.datasource.url, 
    * spring.datasource.username, spring.datasource.password found in application-dev.properties. 
    */
   @Profile("dev")
