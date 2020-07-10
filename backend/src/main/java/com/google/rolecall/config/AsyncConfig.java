@@ -10,7 +10,8 @@ import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-/** This class enables asyncronous calls by initializing a default thread executor and an
+/* 
+ * This class enables asyncronous calls by initializing a default thread executor and an
  * accompanying exception handler for all asyncronous methods in the application. Targets
  * methods annotated with @async.
  */

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-/** Methods to be run before and after the server loads. */
+/* Methods to be run before and after the server loads. */
 @Component
 public class ApplicationLoader implements ApplicationRunner {
 

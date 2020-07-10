@@ -11,7 +11,7 @@ import java.util.concurrent.CompletableFuture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/** Endpoints for manipulating and fetching the loginCounter value for a User based on id. */
+/* Endpoints for manipulating and fetching the loginCounter value for a User based on id. */
 @Endpoint("/api/increment-login")
 public class IncrementUserLogin extends AsyncRestEndpoint{
   

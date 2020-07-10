@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 
-/** Enitity for accessing and updating User objects stored in a database. */
+/* Enitity for accessing and updating User objects stored in a database. */
 public interface UserRepository extends CrudRepository<User, Integer> {
 
   Optional<User> findByFirstNameAndLastNameAndEmailIgnoreCase(String firstName, 
