@@ -25,8 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Profile({"dev","prod"})
 public class RepositoryConfig {
 
-  @Autowired
-  DataSource dataSource;
+  private final DataSource dataSource;
 
   @Bean
   @Primary
@@ -49,10 +48,15 @@ public class RepositoryConfig {
   @Primary
   public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
 
-    JpaTransactionManager txManager = new JpaTransactionManager();
+    JpaTransactionManager txnManager = new JpaTransactionManager();
 
-    txManager.setEntityManagerFactory(entityManagerFactory);
+    txnManager.setEntityManagerFactory(entityManagerFactory);
 
-    return txManager;
+    return txnManager;
+  }
+
+  @Autowired
+  public RepositoryConfig(DataSource dataSource) {
+    this.dataSource = dataSource;
   }
 }
