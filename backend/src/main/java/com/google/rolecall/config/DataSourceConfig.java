@@ -58,7 +58,7 @@ public class DataSourceConfig {
   }
 
   @VisibleForTesting
-  HikariConfig getCloudConfig() {
+  HikariConfig getCloudConfig() throws RuntimeException {
     String dbName = env.getProperty("spring.cloud.gcp.sql.databaseName");
     String userName = env.getProperty("spring.datasource.username");
     String password = getCloudDbPassword();
@@ -79,20 +79,20 @@ public class DataSourceConfig {
     * through a given project id and secret name (set in application-prod.properties).
     */
   @VisibleForTesting
-  String getCloudDbPassword() {
+  String getCloudDbPassword() throws RuntimeException {
     String password;
     String projectId = env.getProperty("spring.cloud.gcp.projectId");
     String secretName = env.getProperty("cloud.secret.name");
     try {
       password = getSecretResponse(projectId, secretName).getPayload().getData().toStringUtf8();
     } catch (IOException e) {
-      throw new Error("Unable to access secret manager. " + 
+      throw new RuntimeException("Unable to access secret manager. " + 
           "Applications calling this method should be run on App Engine.");
     } catch (ApiException e) {
-      throw new Error("Unable to get cloud db password. Call for password failed. " + 
+      throw new RuntimeException("Unable to get cloud db password. Call for password failed. " + 
           "Check spring.cloud.gcp.projectId and cloud.secret.name for correctness.");
     } catch (Exception e) {
-      throw new UnknownError("Failed to get cloud db password for UNKNOWN reason: \n" + e.getMessage());
+      throw new RuntimeException("Failed to get cloud db password for UNKNOWN reason: \n" + e.getMessage());
     }
 
     return password;

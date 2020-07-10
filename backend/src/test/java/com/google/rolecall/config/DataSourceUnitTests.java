@@ -1,5 +1,6 @@
 package com.google.rolecall.config;
 
+import com.google.api.gax.rpc.ApiException;
 import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
 import com.google.cloud.secretmanager.v1.SecretPayload;
 import static com.google.common.truth.Truth.assertThat;
@@ -7,13 +8,21 @@ import com.google.protobuf.ByteString;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+
+import java.io.IOException;
+
 import org.springframework.mock.env.MockEnvironment;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -79,5 +88,46 @@ public class DataSourceUnitTests {
     assert(result.getUsername()).equals(username);
     assert(result.getPassword()).equals(password);
     assert(result.getJdbcUrl()).equals(String.format("jdbc:mysql:///%s", dbName));
+  }
+
+  @Test
+  public void getCloudDataSourceWrongEnv_failure() throws Exception {
+    // Mock
+    doThrow(new IOException()).when(config).getSecretResponse(eq(projectId), eq(secretName));
+
+    // Execute
+    RuntimeException ex = assertThrows(RuntimeException.class, config::getCloudConfig);
+
+    // Assert
+    assert(ex.getMessage()).equals("Unable to access secret manager. " + 
+        "Applications calling this method should be run on App Engine.");
+  }
+
+  @Test
+  public void getCloudDataSourceWrongSecret_failure() throws Exception {
+    // Mock
+    doThrow(mock(ApiException.class)).when(config).getSecretResponse(eq(projectId), eq(secretName));
+
+    // Execute
+    RuntimeException ex = assertThrows(RuntimeException.class, config::getCloudConfig);
+
+    // Assert
+    assert(ex.getMessage()).equals("Unable to get cloud db password. Call for password failed." + 
+        " Check spring.cloud.gcp.projectId and cloud.secret.name for correctness.");
+  }
+
+  @Test
+  public void getCloudDataSourceUnexpectedException_failure() throws Exception {
+    // Mock
+    Exception exception = mock(Exception.class);
+    doThrow(exception).when(config).getSecretResponse(eq(projectId), eq(secretName));
+    doReturn("Error message").when(exception).getMessage();
+
+    // Execute
+    RuntimeException ex = assertThrows(RuntimeException.class, config::getCloudConfig);
+
+    // Assert
+    assert(ex.getMessage()).equals("Failed to get cloud db password for UNKNOWN reason: \n" + 
+        "Error message");
   }
 }
