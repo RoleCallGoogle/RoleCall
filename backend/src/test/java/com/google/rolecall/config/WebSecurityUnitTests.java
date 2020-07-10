@@ -23,12 +23,11 @@ public class WebSecurityUnitTests {
         throw new IllegalStateException("For testing purposes only");
       }
     };
-    AuthenticationManagerBuilder authenticationBuilder = 
-        new AuthenticationManagerBuilder(objectPostProcessor);
-		Map<Class<?>, Object> sharedObjects = new HashMap<>();
-
-		HttpSecurity http = new HttpSecurity(objectPostProcessor, authenticationBuilder,
-				sharedObjects);
+    AuthenticationManagerBuilder authenticationBuilder = new AuthenticationManagerBuilder(
+        objectPostProcessor);
+    Map<Class<?>, Object> sharedObjects = new HashMap<>();
+    HttpSecurity http = new HttpSecurity(objectPostProcessor, authenticationBuilder,
+        sharedObjects);
 
     // Execute
     config.configure(http);
