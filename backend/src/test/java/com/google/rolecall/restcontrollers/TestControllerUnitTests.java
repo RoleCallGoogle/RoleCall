@@ -35,6 +35,6 @@ public class TestControllerUnitTests {
     UnsupportedOperationException exception = assertThrows(UnsupportedOperationException.class, controller::throwException);
 
     // Assert
-    assertThat(ex).hasMessageThat().isEqualTo("POST is not defined for this endpoint");
+    assertThat(exception).hasMessageThat().isEqualTo("POST is not defined for this endpoint");
   }
 }
