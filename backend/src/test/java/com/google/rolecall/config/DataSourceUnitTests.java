@@ -99,8 +99,8 @@ public class DataSourceUnitTests {
     RuntimeException ex = assertThrows(RuntimeException.class, config::getCloudConfig);
 
     // Assert
-    assert(ex.getMessage()).equals("Unable to access secret manager. " + 
-        "Applications calling this method should be run on App Engine.");
+    assert(ex.getMessage()).equals("Unable to access secret manager. "
+      + "Applications calling this method should be run on App Engine.");
   }
 
   @Test
@@ -112,8 +112,8 @@ public class DataSourceUnitTests {
     RuntimeException ex = assertThrows(RuntimeException.class, config::getCloudConfig);
 
     // Assert
-    assert(ex.getMessage()).equals("Unable to get cloud db password. Call for password failed." + 
-        " Check spring.cloud.gcp.projectId and cloud.secret.name for correctness.");
+    assert(ex.getMessage()).equals("Unable to get cloud db password. Call for password failed."
+        + " Check spring.cloud.gcp.projectId and cloud.secret.name for correctness.");
   }
 
   @Test
@@ -127,7 +127,7 @@ public class DataSourceUnitTests {
     RuntimeException ex = assertThrows(RuntimeException.class, config::getCloudConfig);
 
     // Assert
-    assert(ex.getMessage()).equals("Failed to get cloud db password for UNKNOWN reason: \n" + 
-        "Error message");
+    assert(ex.getMessage()).equals("Failed to get cloud db password for UNKNOWN reason: \n"
+        + "Error message");
   }
 }

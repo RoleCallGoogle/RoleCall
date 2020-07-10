@@ -86,13 +86,14 @@ public class DataSourceConfig {
     try {
       password = getSecretResponse(projectId, secretName).getPayload().getData().toStringUtf8();
     } catch (IOException e) {
-      throw new RuntimeException("Unable to access secret manager. " + 
-          "Applications calling this method should be run on App Engine.");
+      throw new RuntimeException("Unable to access secret manager. "
+          + "Applications calling this method should be run on App Engine.");
     } catch (ApiException e) {
-      throw new RuntimeException("Unable to get cloud db password. Call for password failed. " + 
-          "Check spring.cloud.gcp.projectId and cloud.secret.name for correctness.");
+      throw new RuntimeException("Unable to get cloud db password. Call for password failed. "
+          + "Check spring.cloud.gcp.projectId and cloud.secret.name for correctness.");
     } catch (Exception e) {
-      throw new RuntimeException("Failed to get cloud db password for UNKNOWN reason: \n" + e.getMessage());
+      throw new RuntimeException("Failed to get cloud db password for UNKNOWN reason: \n" 
+          + e.getMessage());
     }
 
     return password;
