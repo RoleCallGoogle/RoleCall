@@ -32,7 +32,7 @@ public class TestControllerUnitTests {
   @Test
   public void postInvokeError_failure() throws Exception {
     //Execute
-    UnsupportedOperationException ex = assertThrows(UnsupportedOperationException.class, controller::throwException);
+    UnsupportedOperationException exception = assertThrows(UnsupportedOperationException.class, controller::throwException);
 
     // Assert
     assertThat(ex).hasMessageThat().isEqualTo("POST is not defined for this endpoint");
