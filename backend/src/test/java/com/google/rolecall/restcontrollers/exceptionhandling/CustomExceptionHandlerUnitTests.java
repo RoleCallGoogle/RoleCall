@@ -91,8 +91,10 @@ public class CustomExceptionHandlerUnitTests {
     // Assert
     assertThat(response.getStatusCode()).isEqualTo(status);
     assertThat(response.getHeaders()).isEqualTo(headers);
+
     Object body = response.getBody();
     assertThat(body).isInstanceOf(ErrorResponse.class);
+    
     ErrorResponse error = (ErrorResponse) body;
     assertThat(error.error).isEqualTo(message);
     assertThat(error.status).isEqualTo(status.value());
