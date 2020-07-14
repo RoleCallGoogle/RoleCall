@@ -2,7 +2,6 @@ package com.google.rolecall.restcontrollers.exceptionhandling;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 
@@ -24,7 +23,7 @@ public class ErrorResponse {
     return ResponseEntity.status(status).body(this);
   }
 
-  public ErrorResponse (String error, int status) {
+  public ErrorResponse(String error, int status) {
     this.error = error;
     this.status = status;
   }

@@ -22,8 +22,8 @@ public class CustomControllerExceptionHandler extends ResponseEntityExceptionHan
   @Override
   protected ResponseEntity<Object> handleNoHandlerFoundException(
       NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-    String invalidURL = ex.getRequestURL();
-    ErrorResponse error = new ErrorResponse(String.format("Path %s does not exist.", invalidURL),
+    String invalidUrl = ex.getRequestURL();
+    ErrorResponse error = new ErrorResponse(String.format("Path %s does not exist.", invalidUrl),
         status.value());
 
     return error.getResponse(headers);
