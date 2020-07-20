@@ -63,7 +63,7 @@ public class UserManagement extends AsyncRestEndpoint {
    * @param user {@Link UserInfo} object stores client inputed values for the new {@link User}.
    * @return New {@Link User} object created and saved in the databse.
    * @throws InvalidParameterException if {@Link UserInfo} user does not contain sufficient
-   *    or valid new user information. See {@link UserServices} for specifics.
+   *     or valid new user information. See {@link UserServices} for specifics.
    */
   @Post
   public CompletableFuture<ResponseSchema<User>> createUser(@RequestBody UserInfo user) {
@@ -86,7 +86,7 @@ public class UserManagement extends AsyncRestEndpoint {
    * @return Edited {@Link User} object created and saved in the databse.
    * @throws InvalidParameterException if {@Link UserInfo} user does not contain a user id.
    * @throws EntityNotFoundException if {@Link UserInfo} user contains an id that does not exist
-   *    in the database.
+   *     in the database.
    */
   @Patch
   public CompletableFuture<ResponseSchema<User>> editUser(@RequestBody UserInfo user) {
@@ -112,7 +112,7 @@ public class UserManagement extends AsyncRestEndpoint {
    * @param id Unique Id associated with the {@link User} object to be deleted.
    * @return Nothing on successful deletion.
    * @throws EntityNotFoundException when the id does not match an existing {@link User} object.
-   *    in the database.
+   *     in the database.
    */
   @Delete(Constants.RequestParameters.USER_ID)
   public CompletableFuture<Void> deleteUser(

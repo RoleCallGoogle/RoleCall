@@ -80,7 +80,7 @@ public class UserServices {
    * @param newUser {@link UserInfo} containing information describing the user edits.
    * @return The updated {@link User}.
    * @throws EntityNotFoundException The id from {@link UserInfo} newUser does not exist
-   *    in the database.
+   *     in the database.
    */
     public User editUser(UserInfo newUser) throws EntityNotFoundException {
     User.Builder builder = this.getUser(newUser.id()).toBuilder()
@@ -104,7 +104,8 @@ public class UserServices {
       return userRepo.save(builder.build());
     } catch(InvalidParameterException e) { 
       // Unreachable unless an invalid object exists in the database
-      throw new Error(String.format("Tried to edit User with id %d with invalid properties", newUser.id()));
+      throw new Error(String.format(
+          "Tried to edit User with id %d with invalid properties", newUser.id()));
     }
   }
 
