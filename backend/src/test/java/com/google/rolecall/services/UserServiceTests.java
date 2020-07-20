@@ -281,7 +281,7 @@ public class UserServiceTests {
 
     // Assert
     verify(userRepo, never()).save(any(User.class));
-    assertThat(exception).hasMessageThat().contains("unique email");
+    assertThat(exception).hasMessageThat().contains(email);
   }
 
   @Test

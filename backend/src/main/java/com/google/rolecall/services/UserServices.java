@@ -48,7 +48,8 @@ public class UserServices {
     } else if(!validateEmail(newUser.email())) {
       throw new InvalidParameterException("User requires valid email address");
     } else if(userRepo.findByEmailIgnoreCase(newUser.email()).isPresent()) {
-      throw new InvalidParameterException("User requires unique email address");
+      throw new InvalidParameterException(String.format("A user with email %s already exists",
+          newUser.email()));
     }
     
     User user = User.newBuilder()
@@ -98,17 +99,13 @@ public class UserServices {
         .setManagePieces(newUser.managePieces())
         .setManageRoles(newUser.manageRoles())
         .setManageRules(newUser.manageRules());
-    
-    User user;
-    
+
     try {
-      user = builder.build();
+      return userRepo.save(builder.build());
     } catch(InvalidParameterException e) { 
       // Unreachable unless an invalid object exists in the database
-      throw new Error("Tried to edit User with invalid properties");
+      throw new Error(String.format("Tried to edit User with id %d with invalid properties", newUser.id()));
     }
-    
-    return userRepo.save(user);
   }
 
   /** 
