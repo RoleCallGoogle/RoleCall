@@ -3,7 +3,6 @@ package com.google.rolecall;
 import com.google.rolecall.models.User;
 import com.google.rolecall.repos.UserRepository;
 import com.google.rolecall.restcontrollers.exceptionhandling.RequestExceptions.InvalidParameterException;
-
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -40,7 +40,7 @@ public class UserServices {
    * @param newUser {@link UserInfo} containing information describing the new user.
    * @return The new {@link User} created and stored.
    * @throws InvalidParameterException When firstName, lastName, or email are null in
-   * {@link UserInfo} newUser and when the email is malformatted or already exists.
+   *    {@link UserInfo} newUser and when the email is malformatted or already exists.
    */
   public User createUser(UserInfo newUser) throws InvalidParameterException {
     if(newUser.email() == null) {
@@ -79,7 +79,7 @@ public class UserServices {
    * @param newUser {@link UserInfo} containing information describing the user edits.
    * @return The updated {@link User}.
    * @throws EntityNotFoundException The id from {@link UserInfo} newUser does not exist
-   * in the database.
+   *    in the database.
    */
     public User editUser(UserInfo newUser) throws EntityNotFoundException {
     User.Builder builder = this.getUser(newUser.id()).toBuilder()
