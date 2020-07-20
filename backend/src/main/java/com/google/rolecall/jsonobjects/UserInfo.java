@@ -2,6 +2,7 @@ package com.google.rolecall.jsonobjects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.auto.value.AutoValue;
+
 import java.util.Calendar;
 
 import javax.annotation.Nullable;
@@ -43,6 +44,18 @@ public abstract class UserInfo {
   public abstract Boolean manageRoles();
   @Nullable
   public abstract Boolean manageRules();
+
+  /* Every UserInfo should be unique unless it's being comapred to itself */
+  @Override
+  public boolean equals(Object o) {
+    return this == o;
+  }
+
+  /* Object hashcode */
+  @Override
+  public int hashCode() {
+    return super.hashCode();
+  }
 
   public static Builder newBuilder() {
     return new AutoValue_UserInfo.Builder();
