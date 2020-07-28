@@ -11,6 +11,11 @@ export let constNavBarEntries: AppTypes.NavBarChild[] = [
     icon: 'dashboard'
   },
   {
+    name: 'Help',
+    routerLinkUrl: 'help/',
+    icon: 'help'
+  },
+  {
     name: 'Settings',
     routerLinkUrl: 'settings/',
     icon: 'settings'

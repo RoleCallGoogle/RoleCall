@@ -4,10 +4,12 @@ import { HomepageModule } from '../homepage/homepage.module';
 import { HomepageBase } from '../homepage/homepage_base.component';
 import { SettingsModule } from '../settings/settings.module';
 import { SettingsBase } from '../settings/settings_base.component';
-
+import { HelpModule } from './help/help.module';
+import { HelpBaseComponent } from './help/help_base.component';
 
 const routes: Routes = [
   { path: '', component: HomepageBase },
+  { path: 'help', component: HelpBaseComponent},
   { path: 'settings', component: SettingsBase },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
@@ -15,7 +17,8 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes),
     HomepageModule,
-    SettingsModule
+    SettingsModule,
+    HelpModule,
   ],
   exports: [RouterModule]
 })
