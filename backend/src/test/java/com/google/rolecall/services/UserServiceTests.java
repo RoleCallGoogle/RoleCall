@@ -410,19 +410,36 @@ public class UserServiceTests {
     // Assert
     verify(userRepo, never()).save(any(User.class));
     assertThat(exception).hasMessageThat().contains(Integer.toString(invalidId));
-}
+  }
 
   @Test
   public void deleteUser_success() throws Exception {
     // Mock
     lenient().doNothing().when(userRepo).deleteById(id);
-    lenient().doReturn(Optional.of(new CastMember())).when(castMemberRepo).findFirstByUser(any(User.class));
+    lenient().doReturn(Optional.empty()).when(castMemberRepo).findFirstByUser(any(User.class));
 
     // Execute
     userService.deleteUser(id);
 
     // Assert
     verify(userRepo, times(1)).deleteById(id);
+  }
+
+  @Test
+  public void deleteUserWithChildren_failure() throws Exception {
+    // Mock
+    lenient().doNothing().when(userRepo).deleteById(id);
+    lenient().doReturn(Optional.of(new CastMember())).when(castMemberRepo)
+        .findFirstByUser(any(User.class));
+
+    // Execute
+    InvalidParameterException exception = assertThrows(InvalidParameterException.class,
+        () -> userService.deleteUser(id));
+
+    // Assert
+    assertThat(exception).hasMessageThat().contains(
+          "User involved in cast or performances cannot be deleted");
+    verify(userRepo, never()).deleteById(id);
   }
 
   @Test
