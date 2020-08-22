@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/** Endpoints for manipulating Cast, SubCast, and CastMember Objects. */
 @Endpoint(Constants.Mappings.CAST_MANAGEMENT)
 public class CastManagement extends AsyncRestEndpoint {
   
